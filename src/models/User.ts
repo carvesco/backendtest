@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 
+
 const userSchema = new Schema(
   {
     name: {
@@ -11,7 +12,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
@@ -21,9 +22,9 @@ const userSchema = new Schema(
   },
   {
     versionKey: false,
-    timestamps: true
+    timestamps: true,
   }
 );
 
 
-export default model ('User',userSchema)
+export default model("User", userSchema);
