@@ -15,8 +15,8 @@ export const getUsers: RequestHandler = async (req, res) => {
 };
 
 export const logIn: RequestHandler = async (req, res) => {
-  const userFound = await User.findOne({ email: req.params.email });
-  console.log(req.body.password);
+  const userFound = await User.findOne({ email: req.body.email });
+  console.log(req.body);
   if (userFound) {
     const auth = bcrypt.compareSync(req.body.password, userFound.password);
     if (auth) {
