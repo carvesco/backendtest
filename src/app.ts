@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import userRoutes from "./routes/user.routes";
 import productRoutes from "./routes/product.routes"
+import verifytoken from "./middleware/validate-jwt"
 
 
 const app = express()
@@ -16,6 +17,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 app.use(userRoutes)
-app.use(productRoutes)
+app.use(verifytoken,productRoutes)
 
 export default app 
