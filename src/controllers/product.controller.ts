@@ -25,10 +25,10 @@ export const getProduct: RequestHandler = async (req, res) => {
 };
 
 export const createProduct: RequestHandler = async (req, res) => {
-  const productFound = await Product.findOne({ email: req.body.email });
+  /*const productFound = await Product.findOne({ email: req.body.email });
   if (productFound) {
     return res.status(301).json({ message: "user with email already exists" });
-  }
+  }*/
   const product = new Product(req.body);
   const savedProduct = await product.save();
   console.log(product);
@@ -41,4 +41,16 @@ export const deleteProduct: RequestHandler = async (req, res) => {
   const productFound = await Product.findByIdAndDelete(req.params.id);
   if (!productFound) return res.status(204).json();
   return res.json({ message: "deleted" });
+};
+
+export const updateProduct: RequestHandler = async (req, res) => {
+  const valid = Types.ObjectId.isValid(req.params.id);
+  console.log(req.body);
+  const productFound = await Product.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  if (!productFound) return res.status(204).json();
+  return res.json(productFound);
 };
